@@ -7,7 +7,7 @@ class Detector {
   
   ArrayList<Contour> allContours;
   ArrayList<Contour> newContours;
-  PVector prevFlow = new PVector;
+  PVector prevFlow = new PVector();
   PVector flow;
   
   Detector(PApplet parent) {
@@ -99,6 +99,7 @@ class Detector {
     noFill();
     strokeWeight(3);
     pushMatrix();
+    colorMode(RGB);
     translate((width-frameW)/2, (height-frameH)/2);
     if (allC) drawAllContours();
     if (newC) drawNewContours();

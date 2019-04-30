@@ -29,7 +29,7 @@ class Camera {
   PImage screen;
   
   Camera(int whichWebcam) {
-    println(Webcam.getWebcams());
+    // println(Webcam.getWebcams());
     if (whichWebcam < Webcam.getWebcams().size()) {
       webcam = Webcam.getWebcams().get(whichWebcam);
     } else {
@@ -40,8 +40,8 @@ class Camera {
     webcam.open(true);
     
     BufferedImage bimg = webcam.getImage();
-    println(bimg.getWidth());
-    println(bimg.getHeight());
+    // println(bimg.getWidth());
+    // println(bimg.getHeight());
     
     dx = (bimg.getWidth() - width)/2;
     dy = (bimg.getHeight() - height)/2;
