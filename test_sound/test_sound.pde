@@ -9,5 +9,5 @@ void setup() {
 }
 
 void draw() {
-  s.jumpdown(1);
+  s.jumpup(1);
 } 
