@@ -37,7 +37,7 @@ class Sound {
     while (curr_note < 0) {
       curr_note += scale.length;
     }
-    sc.playNote(50 + scale[curr_note], (int)random(80)+40, random(.2, 1));
+    sc.playNote(50 + scale[curr_note], (int)random(80)+40, random(.2, 2));
   }
   
 }

@@ -20,7 +20,7 @@ Detector detector;
 Sound s;
 Etch e;
 
-boolean showImage = true;
+boolean showImage = false;
 
 PVector flow = new PVector();
 PVector newest = new PVector();
@@ -63,10 +63,6 @@ void draw() {
   direction = detector.checkDirectionChange();
   // if (isMoving) println(direction);
   
-  if (e != null) {
-    e.sketch();
-  }
-  
   if (!showImage) {
     contours = detector.getAllContours();
     drawContours(contours);
@@ -74,9 +70,12 @@ void draw() {
   
     if (direction > 0) s.jumpup(1);
     if (direction < 0) s.jumpdown(1);
+    if (e != null) {
+      e.sketch();
+    }
   } else {
     camera.display();
-    detector.drawDebug(true, true, true);
+    detector.drawDebug(true, false, false);
   }
 }
 

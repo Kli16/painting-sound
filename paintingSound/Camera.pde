@@ -89,7 +89,7 @@ class Camera {
   }
   
   void display() {
-    background(0);
+    // background(0);
     image(screen, frameX, frameY);
   }
   

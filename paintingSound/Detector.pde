@@ -3,7 +3,7 @@ OpenCV opencv;
 
 import java.awt.Rectangle;
 
-float flowThreshold = 0.03;
+float flowThreshold = 0.01;
 float areaThreshold = 100;
 int pixelThreshold = 120; // should be between 135 and 140
 
