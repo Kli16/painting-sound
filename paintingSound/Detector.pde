@@ -3,6 +3,10 @@ OpenCV opencv;
 
 import java.awt.Rectangle;
 
+float flowThreshold = 0.03;
+float areaThreshold = 100;
+int pixelThreshold = 120; // should be between 135 and 140
+
 class Detector {
   
   ArrayList<Contour> allContours;
@@ -30,12 +34,9 @@ class Detector {
     /****** detect shapes ******/
     
     // opencv.brightness((int) map(mouseX, 0, width, -200, 200));
-    // opencv.contrast(0);
-    // image(opencv.getOutput(), 0, 0);
+    // opencv.contrast((int) map(mouseX, 0, width, -200, 200));
     opencv.gray();
-    int threshold = 136; // should be between 135 and 140
-    // int threshold = (int) map(mouseX, 0, width, 130, 170);
-    opencv.threshold(threshold);
+    opencv.threshold(pixelThreshold);
     // image(opencv.getOutput(), 0, 0);
     allContours = opencv.findContours();
     
@@ -53,7 +54,7 @@ class Detector {
   
   PVector getNewLocation() {
     Contour c = findLargest(newContours);
-    if (c == null || c.area() < 100) {
+    if (c == null || c.area() < areaThreshold) {
       return null; 
     }
     Rectangle box = c.getBoundingBox();
@@ -61,11 +62,15 @@ class Detector {
   }
   
   boolean checkMoving() {
-    return flow.mag() > 0.1;
+    return flow.mag() > flowThreshold;
   }
   
-  boolean checkDirectionChange() {
-    return checkMoving() && PVector.angleBetween(prevFlow, flow) > radians(90);
+  int checkDirectionChange() {
+    if (checkMoving() && PVector.angleBetween(prevFlow, flow) > radians(90)) {
+      return flipCoin();
+    } else {
+      return 0;
+    }
   }
   
   ArrayList<Contour> getAllContours() {
@@ -73,6 +78,10 @@ class Detector {
   }
   
   /**************** helpers *****************/
+  
+  int flipCoin() {
+    return floor(random(0, 2)) * 2 - 1;
+  }
   
   private Contour findLargest(ArrayList<Contour> contours) {
     float biggestArea = 0;

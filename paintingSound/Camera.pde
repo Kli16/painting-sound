@@ -8,28 +8,30 @@ import java.awt.Dimension;
 Webcam webcam;
 
  
-int camW = 1280;
+int camW = 1080;
 int camH = 720;
 
-int frameW = 600;
-int frameH = 600;
+int frameW = 1700;
+int frameH = 1700;
   
-
+int frameX = (w - frameW) / 2;
+int frameY = (h - frameH) / 2;
+  
+  
 class Camera {
   
-  int frameX = (camW - frameW) / 2;
-  int frameY = (camH - frameH) / 2;
-  
-  int imgW = 1280;
+  int imgW = 720;
   int imgH = 720;
   
   int dx = 0;
   int dy = 0;
   
+  int move = 15;
+  int scale = 20;
+  
   PImage screen;
   
   Camera(int whichWebcam) {
-    // println(Webcam.getWebcams());
     if (whichWebcam < Webcam.getWebcams().size()) {
       webcam = Webcam.getWebcams().get(whichWebcam);
     } else {
@@ -43,8 +45,8 @@ class Camera {
     // println(bimg.getWidth());
     // println(bimg.getHeight());
     
-    dx = (bimg.getWidth() - width)/2;
-    dy = (bimg.getHeight() - height)/2;
+    // dx = (bimg.getWidth() - width)/2;
+    // dy = (bimg.getHeight() - height)/2;
   }
   
   PImage update() {
@@ -54,30 +56,35 @@ class Camera {
   }
   
   void keyPress() {
+    // if (!showImage) return;
     if (!keyPressed) return;
     
     if (key == '-') {
-      imgW -= 2;
-      imgH -= 2;
+      imgW -= scale;
+      imgH -= scale;
     } else if (key == '+') {
-      imgW += 2;
-      imgH += 2;
+      imgW += scale;
+      imgH += scale;
     } else if (keyCode == UP) {
-      dy += 1;
+      dy += move;
     } else if (keyCode == DOWN) {
-      dy -= 1;
+      dy -= move;
     } else if (keyCode == LEFT) {
-      dx -= 1;
+      dx -= move;
     } else if (keyCode == RIGHT) {
-      dx += 1;
+      dx += move;
     }
   }
   
   PImage getCroppedCapture() {
     BufferedImage bimg = webcam.getImage();
     PImage pimg = new PImage(bimg);
-    pimg.resize(imgW, imgH);
-    pimg = pimg.get(frameX + dx, frameY + dy, frameW, frameH);  
+    // pimg.resize(imgW, imgH);
+    // pimg = pimg.get(frameX + dx, frameY + dy, frameW, frameH); 
+    int imgX = (camW - imgW) /2;
+    int imgY = (camH - imgH) /2;
+    pimg = pimg.get(imgX + dx, imgY + dy, imgW, imgH); //<>//
+    pimg.resize(frameW, frameH);
     return pimg;
   }
   
