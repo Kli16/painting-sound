@@ -24,12 +24,12 @@ class Detector {
     
     
     /****** background subtraction ******/
-    
+    /*
     opencv.updateBackground();
     opencv.dilate();
     opencv.erode();
     newContours = opencv.findContours();
-    
+    */
     
     /****** detect shapes ******/
     

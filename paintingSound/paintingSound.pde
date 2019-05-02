@@ -56,7 +56,7 @@ void draw() {
   flow = detector.getFlow();
   
   // note this may be null if no movement detected
-  newest = detector.getNewLocation();
+  // newest = detector.getNewLocation();
   
   isMoving = detector.checkMoving();
   
@@ -66,7 +66,7 @@ void draw() {
   if (!showImage) {
     contours = detector.getAllContours();
     drawContours(contours);
-    drawCircle(newest, flow.mag());
+    //drawCircle(newest, flow.mag());
   
     if (direction > 0) s.jumpup(1);
     if (direction < 0) s.jumpdown(1);

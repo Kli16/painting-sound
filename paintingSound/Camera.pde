@@ -20,8 +20,8 @@ int frameY = (h - frameH) / 2;
   
 class Camera {
   
-  int imgW = 720;
-  int imgH = 720;
+  int imgW = 550;
+  int imgH = 550;
   
   int dx = 0;
   int dy = 0;
@@ -60,11 +60,11 @@ class Camera {
     if (!keyPressed) return;
     
     if (key == '-') {
-      imgW -= scale;
-      imgH -= scale;
-    } else if (key == '+') {
       imgW += scale;
       imgH += scale;
+    } else if (key == '+') {
+      imgW -= scale;
+      imgH -= scale;
     } else if (keyCode == UP) {
       dy += move;
     } else if (keyCode == DOWN) {
